@@ -1,16 +1,17 @@
-main: main.o funcs.o
-	g++ -o main main.o funcs.o
+main: main.o caesar.o decrypt.o
+	g++ -o main main.o caesar.o decrypt.o
 
-tests: tests.o funcs.o
-	g++ -o tests tests.o funcs.o
+tests: tests.o caesar.o decrypt.o
+	g++ -o tests tests.o caesar.o decrypt.o
 
+caesar.o: caesar.cpp caesar.h decrypt.h
 
+decrypt.o: decrypt.cpp decrypt.h
 
-funcs.o: funcs.cpp funcs.h
+main.o: main.cpp caesar.h
 
-main.o: main.cpp funcs.h
-
-tests.o: tests.cpp doctest.h funcs.h
+tests.o: tests.cpp doctest.h caesar.h
 
 clean:
-	rm -f main.o funcs.o tests.o
+	rm -f *.o
+	rm main
